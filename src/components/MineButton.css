@@ -1,0 +1,11 @@
+.Mine {
+    width: 30px;
+    height: 30px;
+    margin: 0 3px;
+    text-align: center;
+}
+
+.Displayed {
+    border: none;
+    background: dimgrey;
+}
