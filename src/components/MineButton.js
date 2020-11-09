@@ -18,14 +18,14 @@ export const MineButton = ({
       return "X";
     }
     if (number === MINE_NUMBERS.EMPTY) {
-      return "";
+      return " ";
     }
     return number + "";
   };
 
   const display = () => {
-    if (gameStatus === GAME_STATUS.NOT_START) {
-      return "";
+    if (gameStatus === GAME_STATUS.NOT_START || !displayed) {
+      return " ";
     }
 
     // clicked mine, game over
@@ -33,7 +33,7 @@ export const MineButton = ({
       return "X";
     }
 
-    return displayed ? getDisplayStr() : "";
+    return getDisplayStr();
   };
 
   return (
