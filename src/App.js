@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./App.css";
 import Container from "./containers/Container";
 import { randomSquare09, markedSquare, log } from "./utils";
+import { GAME_STATUS } from "./constant";
 
 export const AppContext = React.createContext({});
 
@@ -13,11 +14,11 @@ function App() {
   const startGame = () => {
     // generate new mine data
     setSquareData(markedSquare(randomSquare09(squareSize)));
-    setGameStatus(1);
+    setGameStatus(GAME_STATUS.STARTED);
   };
 
   const endGame = () => {
-    setGameStatus(2);
+    setGameStatus(GAME_STATUS.OVER);
   };
 
   return (
