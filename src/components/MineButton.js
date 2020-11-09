@@ -24,7 +24,7 @@ export const MineButton = ({
   };
 
   const display = () => {
-    if (gameStatus === GAME_STATUS.NOT_START || !displayed) {
+    if (gameStatus === GAME_STATUS.NOT_START) {
       return " ";
     }
 
@@ -33,7 +33,7 @@ export const MineButton = ({
       return "X";
     }
 
-    return getDisplayStr();
+    return displayed ? getDisplayStr() : " ";
   };
 
   return (
