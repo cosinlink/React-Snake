@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import "./App.css";
 import Container from "./containers/Container";
-import { randomSquare09, markedSquare, log } from "./utils";
+import { randomSquare09, markedSquare } from "./utils";
 import { GAME_STATUS } from "./constant";
 
 export const AppContext = React.createContext({});
 
 function App() {
   const squareSize = 20;
-  const [gameStatus, setGameStatus] = useState(0);
+  const [gameStatus, setGameStatus] = useState(GAME_STATUS.NOT_START);
   const [squareData, setSquareData] = useState();
 
   const startGame = () => {
@@ -24,9 +24,6 @@ function App() {
   return (
     <AppContext.Provider
       value={{
-        // 0 not start
-        // 1 gaming
-        // 2 over
         gameStatus,
         squareData,
         squareSize,
