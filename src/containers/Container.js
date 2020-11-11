@@ -14,11 +14,12 @@ const emptySquare = (squareSize) => {
 };
 
 const Container = (props) => {
-  const { startGame, endGame } = props;
+  const { startGame, generateSquareData, endGame } = props;
   const { gameStatus, squareData, squareSize } = useContext(AppContext);
   const [squareDisplayed, setSquareDisplayed] = useState(
     emptySquare(squareSize)
   );
+  const [dataGenerated, setDataGenerated] = useState(false)
 
   const valid = (target) => {
     const rows = squareData.length;
@@ -72,10 +73,20 @@ const Container = (props) => {
       }
     }
 
+    console.log(`renderButtons displayed: ${displayed}`)
     return displayed;
   };
 
   const handleClick = (x, y) => {
+    console.log(x, y)
+    console.log(`dataGenerated: ${dataGenerated}`)
+
+    if (!dataGenerated) {
+      generateSquareData()
+      setDataGenerated(true)
+    }
+
+    console.log(`squareData: ${squareData}`)
     // click mine
     if (squareData[x][y] === MINE_NUMBERS.MINE) {
       return endGame();
