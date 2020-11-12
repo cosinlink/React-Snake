@@ -30,8 +30,8 @@ const Container = (props) => {
     return target.x >= 0 && target.y >= 0 && target.x < rows && target.y < cols;
   };
 
-  // when click mineButton, rerender displayed buttons
-  const renderButtons = (prev, squareData, x, y) => {
+  // when click mineButton, rerender buttons displayed
+  const renderButtonsDisplayed = (prev, squareData, x, y) => {
     const displayed = clonedSquare(prev);
     if (squareData[x][y] !== 0) {
       displayed[x][y] = true;
@@ -107,7 +107,7 @@ const Container = (props) => {
     }
 
     // click empty button whose number = 0
-    setSquareDisplayed((prev) => renderButtons(prev, data, x, y));
+    setSquareDisplayed((prev) => renderButtonsDisplayed(prev, data, x, y));
   };
 
   const generateButtons = function () {
