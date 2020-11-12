@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { AppContext } from "../App";
 import { MineButton } from "../components/MineButton";
-import { clonedSquare } from "../utils";
+import {clonedSquare, markedSquare, randomSquare09} from "../utils";
 import { MINE_NUMBERS, GAME_STATUS } from "../constant";
 import "./Container.css";
 
@@ -14,7 +14,7 @@ const emptySquare = (squareSize) => {
 };
 
 const Container = (props) => {
-  const { startGame, generateSquareData, endGame } = props;
+  const { appStart, generateSquareData, endGame } = props;
   const { gameStatus, squareData, squareSize } = useContext(AppContext);
   const [squareDisplayed, setSquareDisplayed] = useState(
     emptySquare(squareSize)
@@ -77,23 +77,37 @@ const Container = (props) => {
     return displayed;
   };
 
+  // make sure the mineButton is 0 when user first clicked
+  const generateDataForFirstClick = (x, y) => {
+    let data = markedSquare(randomSquare09(squareSize))
+    while (data[x][y] !== 0) {
+      data = markedSquare(randomSquare09(squareSize))
+    }
+    generateSquareData(data)
+    return data
+  }
+
   const handleClick = (x, y) => {
     console.log(x, y)
     console.log(`dataGenerated: ${dataGenerated}`)
 
+    let data
+    // first click
     if (!dataGenerated) {
-      generateSquareData()
+      data = generateDataForFirstClick(x, y)
       setDataGenerated(true)
+    } else { // not first click
+      data = squareData
     }
 
-    console.log(`squareData: ${squareData}`)
+    console.log(`squareData: ${data}`)
     // click mine
-    if (squareData[x][y] === MINE_NUMBERS.MINE) {
+    if (data[x][y] === MINE_NUMBERS.MINE) {
       return endGame();
     }
 
     // click empty button whose number = 0
-    setSquareDisplayed((prev) => renderButtons(prev, squareData, x, y));
+    setSquareDisplayed((prev) => renderButtons(prev, data, x, y));
   };
 
   const generateButtons = function () {
@@ -117,15 +131,18 @@ const Container = (props) => {
     return buttons;
   };
 
+  const containerStart = () => {
+    setDataGenerated(false)
+    setSquareDisplayed(emptySquare(squareSize));
+    appStart();
+  }
+
   return (
     <div className="Container">
 
       <button
         className="Start"
-        onClick={() => {
-          setSquareDisplayed(emptySquare(squareSize));
-          startGame();
-        }}
+        onClick={containerStart}
       >
         Start MineSweeper
       </button>

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
 import Container from "./containers/Container";
-import { randomSquare09, markedSquare } from "./utils";
 import { GAME_STATUS } from "./constant";
 
 export const AppContext = React.createContext({});
@@ -27,14 +26,14 @@ function App() {
   const [gameStatus, setGameStatus] = useState(GAME_STATUS.NOT_START);
   const [squareData, setSquareData] = useState();
 
-  const startGame = () => {
+  const appStart = () => {
     // generate new mine data
     setSquareData(zeroSquare(squareSize));
     setGameStatus(GAME_STATUS.STARTED);
   };
 
-  const generateSquareData = () => {
-      setSquareData(markedSquare(randomSquare09(squareSize)));
+  const generateSquareData = (data) => {
+      setSquareData(data);
   }
 
   const endGame = () => {
@@ -50,7 +49,7 @@ function App() {
       }}
     >
       <Container className="App"
-                 startGame={startGame}
+                 appStart={appStart}
                  generateSquareData={generateSquareData}
                  endGame={endGame} />
     </AppContext.Provider>
