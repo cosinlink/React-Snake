@@ -70,7 +70,7 @@ function App() {
             <ModalContainer>
                 <ModalMask></ModalMask>
                 <AlertWindow>
-                    GAME OVER
+                    GAME OVER~_~
                 </AlertWindow>
             </ModalContainer>
         )
