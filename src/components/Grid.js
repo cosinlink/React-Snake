@@ -13,7 +13,7 @@ const Button = styled.button`
   border-radius: 3px;
 `;
 
-export const Pane = ({
+export const Grid = ({
     gameStatus,
     displayed,
 }) => {

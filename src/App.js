@@ -1,41 +1,79 @@
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 import './App.css'
 import Container from './containers/Container'
-import { GAME_STATUS, SQUARE_SIZE } from './constant'
+import {GAME_STATUS, SQUARE_SIZE} from './constant'
+import styled from 'styled-components'
 
 export const AppContext = React.createContext({})
 
-const zeroLine = (squareSize) => {
-    const line = []
-    for (let i = 0; i < squareSize; i++) {
-        line.push(0)
-    }
-    return line
-}
+const ModalContainer = styled.div`
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+`
 
-const zeroSquare = (squareSize) => {
-    const square = []
-    for (let i = 0; i < squareSize; i++) {
-        square.push(zeroLine(squareSize))
-    }
-    return square
-}
+const ModalMask = styled.div`
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background: black;
+    opacity: 0.5;
+`
+
+const AlertWindow = styled.div`
+    margin: 0 auto;
+    width: 500px;
+    height: 200px;
+    line-height: 200px;
+    font-size: xx-large;
+    opacity: 1;
+    
+    top: 50%;
+    position: relative;
+    transform: translateY(-50%);
+    background: white;
+    text-align: center;
+`
 
 function App() {
     const squareSize = SQUARE_SIZE
     const [gameStatus, setGameStatus] = useState(GAME_STATUS.NOT_START)
 
     const appStart = () => {
-        // generate new mine data
         setGameStatus(GAME_STATUS.STARTED)
     }
 
-    const generateSquareData = (data) => {
-
+    const appPause = () => {
+        setGameStatus((prev) => {
+            if (prev === GAME_STATUS.PAUSE) {
+                return GAME_STATUS.STARTED
+            } else {
+                return GAME_STATUS.PAUSE
+            }
+        })
     }
 
     const endGame = () => {
         setGameStatus(GAME_STATUS.OVER)
+    }
+
+    const renderAlert = () => {
+        if (gameStatus !== GAME_STATUS.OVER) {
+            return null
+        }
+
+        return (
+            <ModalContainer>
+                <ModalMask></ModalMask>
+                <AlertWindow>
+                    GAME OVER
+                </AlertWindow>
+            </ModalContainer>
+        )
     }
 
     return (
@@ -45,10 +83,12 @@ function App() {
                 squareSize,
             }}
         >
+            {
+                renderAlert()
+            }
             <Container
-                className="App"
                 appStart={appStart}
-                generateSquareData={generateSquareData}
+                appPause={appPause}
                 endGame={endGame}
             />
         </AppContext.Provider>
