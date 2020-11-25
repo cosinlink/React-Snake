@@ -1,59 +1,58 @@
-import React, { useState } from "react";
-import "./App.css";
-import Container from "./containers/Container";
-import { GAME_STATUS } from "./constant";
+import React, { useState } from 'react'
+import './App.css'
+import Container from './containers/Container'
+import { GAME_STATUS, SQUARE_SIZE } from './constant'
 
-export const AppContext = React.createContext({});
+export const AppContext = React.createContext({})
 
 const zeroLine = (squareSize) => {
-    const line = [];
+    const line = []
     for (let i = 0; i < squareSize; i++) {
-        line.push(0);
+        line.push(0)
     }
-    return line;
+    return line
 }
 
 const zeroSquare = (squareSize) => {
-    const square = [];
+    const square = []
     for (let i = 0; i < squareSize; i++) {
-        square.push(zeroLine(squareSize));
+        square.push(zeroLine(squareSize))
     }
-    return square;
+    return square
 }
 
 function App() {
-  const squareSize = 20;
-  const [gameStatus, setGameStatus] = useState(GAME_STATUS.NOT_START);
-  const [squareData, setSquareData] = useState();
+    const squareSize = SQUARE_SIZE
+    const [gameStatus, setGameStatus] = useState(GAME_STATUS.NOT_START)
 
-  const appStart = () => {
-    // generate new mine data
-    setSquareData(zeroSquare(squareSize));
-    setGameStatus(GAME_STATUS.STARTED);
-  };
+    const appStart = () => {
+        // generate new mine data
+        setGameStatus(GAME_STATUS.STARTED)
+    }
 
-  const generateSquareData = (data) => {
-      setSquareData(data);
-  }
+    const generateSquareData = (data) => {
 
-  const endGame = () => {
-    setGameStatus(GAME_STATUS.OVER);
-  };
+    }
 
-  return (
-    <AppContext.Provider
-      value={{
-        gameStatus,
-        squareData,
-        squareSize,
-      }}
-    >
-      <Container className="App"
-                 appStart={appStart}
-                 generateSquareData={generateSquareData}
-                 endGame={endGame} />
-    </AppContext.Provider>
-  );
+    const endGame = () => {
+        setGameStatus(GAME_STATUS.OVER)
+    }
+
+    return (
+        <AppContext.Provider
+            value={{
+                gameStatus,
+                squareSize,
+            }}
+        >
+            <Container
+                className="App"
+                appStart={appStart}
+                generateSquareData={generateSquareData}
+                endGame={endGame}
+            />
+        </AppContext.Provider>
+    )
 }
 
-export default App;
+export default App
