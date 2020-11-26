@@ -1,5 +1,4 @@
 import React from 'react'
-import { GAME_STATUS } from '../constant'
 import styled from 'styled-components'
 
 const Button = styled.button`
@@ -14,6 +13,6 @@ const Button = styled.button`
     border-radius: 3px;
 `
 
-export const Grid = ({ gameStatus, displayed }) => {
-    return <Button disabled displayed={displayed}></Button>
+export const Grid = ({ displayed }) => {
+    return <Button disabled displayed={displayed}/>
 }
