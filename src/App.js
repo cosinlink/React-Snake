@@ -1,7 +1,7 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import './App.css'
 import Container from './containers/Container'
-import {GAME_STATUS, SQUARE_SIZE} from './constant'
+import { GAME_STATUS, SQUARE_SIZE } from './constant'
 import styled from 'styled-components'
 
 export const AppContext = React.createContext({})
@@ -31,7 +31,7 @@ const AlertWindow = styled.div`
     line-height: 200px;
     font-size: xx-large;
     opacity: 1;
-    
+
     top: 50%;
     position: relative;
     transform: translateY(-50%);
@@ -68,10 +68,8 @@ function App() {
 
         return (
             <ModalContainer>
-                <ModalMask></ModalMask>
-                <AlertWindow>
-                    GAME OVER~_~
-                </AlertWindow>
+                <ModalMask/>
+                <AlertWindow>GAME OVER~_~</AlertWindow>
             </ModalContainer>
         )
     }
@@ -83,9 +81,7 @@ function App() {
                 squareSize,
             }}
         >
-            {
-                renderAlert()
-            }
+            {renderAlert()}
             <Container
                 appStart={appStart}
                 appPause={appPause}
