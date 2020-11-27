@@ -37,6 +37,7 @@ const AlertWindow = styled.div`
     transform: translateY(-50%);
     background: white;
     text-align: center;
+    color: palevioletred;
 `
 
 function App() {
