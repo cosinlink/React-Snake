@@ -4,13 +4,13 @@ import styled from 'styled-components'
 const Button = styled.button`
     /* Adapt the colors based on primary prop */
     background: ${(props) =>
-        props.displayed === true ? 'palevioletred' : 'white'};
+        props.displayed === true ? 'palevioletred' : '#d5d7d8'};
 
-    width: 2em;
-    height: 2em;
-    margin: 0 0.1em;
-    border: 2px solid palevioletred;
-    border-radius: 3px;
+    width: 1em;
+    height: 1em;
+    margin: 0 0.0;
+    border: 1px solid transparent;
+    //border-radius: 3px;
 `
 
 export const Grid = ({ displayed }) => {

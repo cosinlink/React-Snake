@@ -35,7 +35,7 @@ export const useSnakeMove = (direction, gameStatus, squareSize) => {
 
                 return newQueue
             })
-        }, 200)
+        }, 100)
 
         return () => {
             clearInterval(id)

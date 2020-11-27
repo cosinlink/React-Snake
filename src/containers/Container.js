@@ -31,8 +31,8 @@ const PauseButton = styled.button`
 `
 
 const StyledGridLine = styled.div`
-    height: 30px;
-    margin-top: 0.1em;
+    height: 100%;
+    margin-top: 0em;
     display: flex;
     align-items: center;
     justify-content: center;

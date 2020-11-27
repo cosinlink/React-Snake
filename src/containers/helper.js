@@ -56,6 +56,7 @@ export const getMovedQueue = (prevQueue, direction) => {
 
 export const eatSweet = (queue, direction) => {
     queue.unshift(generateNewHead(queue, direction))
+    queue.unshift(generateNewHead(queue, direction))
     return queue
 }
 

@@ -1,4 +1,4 @@
-export const SQUARE_SIZE = 20
+export const SQUARE_SIZE = 40
 
 export const GAME_STATUS = {
     NOT_START: 0,
